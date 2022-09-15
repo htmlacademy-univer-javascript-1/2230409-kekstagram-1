@@ -13,3 +13,6 @@ function randomNumber(from, to) {
 function isStringLengthAllowed(string, allowedLength) {
   return string.length <= allowedLength;
 }
+
+randomNumber(2, 5);
+isStringLengthAllowed('privet', 2);
