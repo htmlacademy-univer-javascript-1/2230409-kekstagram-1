@@ -5,9 +5,9 @@ const randomNonNegativeNumber = (from, to) => {
     return NaN;
   } else if (from === to) {
     return from;
-  } else {
-    return from + Math.floor(Math.random() * (to - from + 1));
   }
+
+  return from + Math.floor(Math.random() * (to - from + 1));
 };
 
 const isStringLengthAllowed = (string, allowedLength) => (
