@@ -1,4 +1,4 @@
-const randomNonNegativeNumber = (from, to) => {
+const getRandomNonNegativeNumber = (from, to) => {
   if (from < 0 || to < 0 || to < from) {
     return NaN;
   }
@@ -10,9 +10,9 @@ const randomNonNegativeNumber = (from, to) => {
   return from + Math.floor(Math.random() * (to - from + 1));
 };
 
-const isStringLengthAllowed = (string, allowedLength) => (
-  string.length <= allowedLength
+const isStringLengthAllowed = (string, length) => (
+  string.length <= length
 );
 
-randomNonNegativeNumber(2, 5);
+getRandomNonNegativeNumber(2, 5);
 isStringLengthAllowed('privet', 2);
