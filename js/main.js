@@ -1,7 +1,9 @@
 const randomNonNegativeNumber = (from, to) => {
   if (from < 0 || to < 0 || to < from) {
     return NaN;
-  } else if (from === to) {
+  }
+
+  if (from === to) {
     return from;
   }
 
