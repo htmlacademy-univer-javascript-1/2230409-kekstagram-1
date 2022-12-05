@@ -1,18 +1,18 @@
-function randomNumber(from, to) {
-  if (from < 0 || to < 0) {
+const getRandomNonNegativeNumber = (from, to) => {
+  if (from < 0 || to < 0 || to < from) {
     return NaN;
-  } else if (to < from) {
-    return NaN;
-  } else if (from === to) {
-    return from;
-  } else {
-    return from + Math.floor(Math.random() * (to - from + 1));
   }
-}
 
-function isStringLengthAllowed(string, allowedLength) {
-  return string.length <= allowedLength;
-}
+  if (from === to) {
+    return from;
+  }
 
-randomNumber(2, 5);
+  return from + Math.floor(Math.random() * (to - from + 1));
+};
+
+const isStringLengthAllowed = (string, length) => (
+  string.length <= length
+);
+
+getRandomNonNegativeNumber(2, 5);
 isStringLengthAllowed('privet', 2);
