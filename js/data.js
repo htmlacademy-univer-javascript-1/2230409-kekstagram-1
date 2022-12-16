@@ -1,4 +1,4 @@
-import {getRandomNonNegativeNumber, getRandomArrayElement} from './util.js';
+import {getRandomNonNegativeNumber, getRandomArrayElement, createIdGenerator} from './util.js';
 
 const DESCRIPTIONS = [
   'Моё лучшее фото',
@@ -41,21 +41,26 @@ const getRandomAvatarSource = () => (
 );
 
 
-let commentId = 1;
+const commentIdGenerator = createIdGenerator();
 const createComment = () => ({
-  id: commentId++,
+  id: commentIdGenerator(),
   avatar: getRandomAvatarSource(),
   message: getRandomArrayElement(COMMENTS),
   name: getRandomArrayElement(NAMES)
 });
 
-let photoId = 1;
+const getFewComments = () => Array.from(
+  {length: getRandomNonNegativeNumber(1, 3)},
+  () => createComment()
+);
+
+const photoIdGenerator = createIdGenerator();
 const createPhoto = () => ({
-  id: photoId++,
+  id: photoIdGenerator(),
   url: getRandomPhotoSource(),
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomNonNegativeNumber(LIKES_MIN, LIKES_MAX),
-  comments: Array.from({length: getRandomNonNegativeNumber(1, 3)}, () => createComment())
+  comments: getFewComments()
 });
 
 const generatePhotos = () => Array.from(

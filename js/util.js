@@ -18,4 +18,16 @@ const getRandomArrayElement = (elements) => (
   elements[getRandomNonNegativeNumber(0, elements.length - 1)]
 );
 
-export {getRandomNonNegativeNumber, isStringLengthAllowed, getRandomArrayElement};
+const createIdGenerator = () => {
+  let id = 1;
+  return function () {
+    return id++;
+  };
+};
+
+export {
+  getRandomNonNegativeNumber,
+  isStringLengthAllowed,
+  getRandomArrayElement,
+  createIdGenerator
+};
