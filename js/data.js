@@ -63,9 +63,9 @@ const createPhoto = () => ({
   comments: getFewComments()
 });
 
-const generatePhotos = () => Array.from(
-  {length: PHOTOS_TO_GENERATE},
+const generatePhotos = (amount = PHOTOS_TO_GENERATE) => Array.from(
+  {length: amount},
   () => createPhoto()
 );
 
-export {generatePhotos};
+export {PHOTOS_TO_GENERATE, generatePhotos};
