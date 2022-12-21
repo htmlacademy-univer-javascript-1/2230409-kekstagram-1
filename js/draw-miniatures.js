@@ -1,10 +1,17 @@
 import {generatePhotos} from './data.js';
+import {fillBigPicture} from './show-big-picture.js';
 
 const PHOTOS_TO_DRAW = 26;
 
 const picturesNode = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture')
   .content.querySelector('.picture');
+
+const setOnMiniatureClickListener = (miniature, photo) => {
+  miniature.addEventListener('click', () => {
+    fillBigPicture(photo);
+  });
+};
 
 const drawMiniatures = (amount = PHOTOS_TO_DRAW) => {
   const photos = generatePhotos(amount);
@@ -14,8 +21,9 @@ const drawMiniatures = (amount = PHOTOS_TO_DRAW) => {
     newPictureFromTemplate.querySelector('.picture__img').src = photo.url;
     newPictureFromTemplate.querySelector('.picture__likes').textContent = photo.likes;
     newPictureFromTemplate.querySelector('.picture__comments').textContent = photo.comments.length;
-    picturesNode.appendChild(newPictureFromTemplate);
+    setOnMiniatureClickListener(newPictureFromTemplate, photo);
+    picturesNode.append(newPictureFromTemplate);
   });
 };
 
-drawMiniatures();
+export {drawMiniatures};

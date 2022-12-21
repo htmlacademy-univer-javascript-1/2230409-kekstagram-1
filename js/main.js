@@ -1,4 +1,3 @@
-import {generatePhotos} from './data.js';
+import {drawMiniatures} from './draw-miniatures.js';
 
-// eslint-disable-next-line no-console
-console.log(generatePhotos());
+drawMiniatures();
