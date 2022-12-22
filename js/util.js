@@ -10,24 +10,24 @@ const getRandomNonNegativeNumber = (from, to) => {
   return from + Math.floor(Math.random() * (to - from + 1));
 };
 
-const isStringLengthAllowed = (string, length) => (
-  string.length <= length
-);
+const isStringLengthAllowed = (string, length) =>
+  string.length <= length;
 
-const getRandomArrayElement = (elements) => (
-  elements[getRandomNonNegativeNumber(0, elements.length - 1)]
-);
+const getRandomArrayElement = (elements) =>
+  elements[getRandomNonNegativeNumber(0, elements.length - 1)];
 
 const createIdGenerator = () => {
   let id = 1;
-  return function () {
-    return id++;
-  };
+  return () => id++;
 };
+
+const isEscPressed = (evt) =>
+  evt.key === 'Escape';
 
 export {
   getRandomNonNegativeNumber,
   isStringLengthAllowed,
   getRandomArrayElement,
-  createIdGenerator
+  createIdGenerator,
+  isEscPressed
 };

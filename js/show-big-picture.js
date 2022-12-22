@@ -1,22 +1,37 @@
+import {isEscPressed} from './util.js';
+
 const bigPictureNode = document.querySelector('.big-picture');
 const commentTemplate = document.querySelector('#comment')
   .content.querySelector('.social__comment');
 
+const commentsNode = bigPictureNode.querySelector('.social__comments');
+
+const clearComments = () => {
+  commentsNode.innerHTML = '';
+};
+
+const showBigPicture = () => {
+  document.body.classList.add('modal-open');
+  bigPictureNode.classList.remove('hidden');
+};
+
 const closeBigPicture = () => {
+  clearComments();
   document.body.classList.remove('modal-open');
   bigPictureNode.classList.add('hidden');
 };
 
 const setOnBigPictureCloseListeners = () => {
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      closeBigPicture();
-    }
-  });
+  document.addEventListener('keydown',
+    (evt) => {
+      if (isEscPressed(evt)) {
+        closeBigPicture();
+      }
+    }, {once: true});
   bigPictureNode.querySelector('.big-picture__cancel')
-    .addEventListener('click', () => {
-      closeBigPicture();
-    });
+    .addEventListener(
+      'click', closeBigPicture, {once: true}
+    );
 };
 
 const hideUnnecessaryNodes = () => {
@@ -25,7 +40,6 @@ const hideUnnecessaryNodes = () => {
 };
 
 const fillComments = (photo) => {
-  const commentsNode = bigPictureNode.querySelector('.social__comments');
   photo.comments.forEach((comment) => {
     const newCommentFromTemplate = commentTemplate.cloneNode(true);
     const commentAvatar = newCommentFromTemplate.querySelector('.social__picture');
@@ -34,11 +48,6 @@ const fillComments = (photo) => {
     newCommentFromTemplate.querySelector('.social__text').textContent = comment.message;
     commentsNode.append(newCommentFromTemplate);
   });
-};
-
-const showBigPicture = () => {
-  document.body.classList.add('modal-open');
-  bigPictureNode.classList.remove('hidden');
 };
 
 const fillBigPicture = (photo) => {
