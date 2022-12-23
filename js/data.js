@@ -1,4 +1,5 @@
 import {getRandomNonNegativeNumber, getRandomArrayElement, createIdGenerator} from './util.js';
+import {MIN_ID, MAX_PHOTO_ID, MAX_AVATAR_ID, LIKES_MIN, LIKES_MAX, PHOTOS_TO_GENERATE} from './constants.js';
 
 const DESCRIPTIONS = [
   'Моё лучшее фото',
@@ -22,15 +23,6 @@ const NAMES = [
   'Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф',
   'Виктор', 'Юлия', 'Люпита', 'Вашингтон',
 ];
-
-const MIN_ID = 1;
-const MAX_PHOTO_ID = 25;
-const MAX_AVATAR_ID = 6;
-
-const LIKES_MIN = 15;
-const LIKES_MAX = 200;
-
-const PHOTOS_TO_GENERATE = 25;
 
 const getRandomPhotoSource = () => (
   `photos/${getRandomNonNegativeNumber(MIN_ID, MAX_PHOTO_ID)}.jpg`

@@ -1,5 +1,5 @@
 import {generatePhotos} from './data.js';
-import {fillBigPicture} from './show-big-picture.js';
+import {showAndFillBigPicture} from './show-big-picture.js';
 
 const PHOTOS_TO_DRAW = 26;
 
@@ -9,7 +9,7 @@ const pictureTemplate = document.querySelector('#picture')
 
 const setOnMiniatureClickListener = (miniature, photo) => {
   miniature.addEventListener('click', () => {
-    fillBigPicture(photo);
+    showAndFillBigPicture(photo);
   });
 };
 

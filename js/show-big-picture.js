@@ -1,4 +1,4 @@
-import {isEscPressed} from './util.js';
+import {isEscPressed, showPopupNode, hidePopupNode} from './util.js';
 
 const bigPictureNode = document.querySelector('.big-picture');
 const commentTemplate = document.querySelector('#comment')
@@ -10,27 +10,24 @@ const clearComments = () => {
   commentsNode.innerHTML = '';
 };
 
-const showBigPicture = () => {
-  document.body.classList.add('modal-open');
-  bigPictureNode.classList.remove('hidden');
+const onEscPressed = (evt) => {
+  if (isEscPressed(evt)) {
+    clearComments();
+    hidePopupNode(bigPictureNode);
+  }
 };
 
-const closeBigPicture = () => {
-  clearComments();
-  document.body.classList.remove('modal-open');
-  bigPictureNode.classList.add('hidden');
-};
-
-const setOnBigPictureCloseListeners = () => {
+const setBigPictureOnCloseListeners = () => {
   document.addEventListener('keydown',
     (evt) => {
-      if (isEscPressed(evt)) {
-        closeBigPicture();
-      }
-    }, {once: true});
+      onEscPressed(evt);
+    });
   bigPictureNode.querySelector('.big-picture__cancel')
-    .addEventListener(
-      'click', closeBigPicture, {once: true}
+    .addEventListener('click',
+      () => {
+        clearComments();
+        hidePopupNode(bigPictureNode);
+      }, {once: true}
     );
 };
 
@@ -50,15 +47,15 @@ const fillComments = (photo) => {
   });
 };
 
-const fillBigPicture = (photo) => {
+const showAndFillBigPicture = (photo) => {
   bigPictureNode.querySelector('.big-picture__img').children[0].src = photo.url;
   bigPictureNode.querySelector('.likes-count').textContent = photo.likes;
   bigPictureNode.querySelector('.social__caption').textContent = photo.description;
   bigPictureNode.querySelector('.comments-count').textContent = photo.comments.length;
   fillComments(photo);
   hideUnnecessaryNodes();
-  setOnBigPictureCloseListeners();
-  showBigPicture();
+  setBigPictureOnCloseListeners();
+  showPopupNode(bigPictureNode);
 };
 
-export {fillBigPicture};
+export {showAndFillBigPicture};
